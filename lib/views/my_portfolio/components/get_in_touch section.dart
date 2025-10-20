@@ -1,67 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:talha_portfolio/constants/app_colors.dart';
+import 'package:talha_portfolio/providers/contact_provider.dart';
 import 'package:talha_portfolio/widgets/custom_buttom.dart';
+import 'package:provider/provider.dart';
 
 class GetInTouchSection extends StatelessWidget {
   const GetInTouchSection({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 100),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [AppColors.primaryColor, AppColors.primaryColor2],
+    return Consumer<ContactProvider>(
+      builder: (context, provider, child) => Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 60, vertical: 100),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [AppColors.primaryColor, AppColors.primaryColor2],
+          ),
         ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            "Get In Touch",
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              "Get In Touch",
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
-          ),
-          const SizedBox(height: 40),
-          const Text(
-            "Have a project in mind or want to collaborate?\nSend me a message below and I’ll get back to you!",
-            textAlign: TextAlign.center,
-            style: TextStyle(color: Colors.white70, fontSize: 18, height: 1.5),
-          ),
-          const SizedBox(height: 60),
-          SizedBox(
-            width: 600,
-            child: Column(
-              children: [
-                _buildTextField("Name", TextEditingController()),
-                const SizedBox(height: 25),
-                _buildTextField("Email", TextEditingController()),
-                const SizedBox(height: 25),
-                _buildTextField(
-                  "Message",
-                  TextEditingController(),
-                  maxLines: 5,
-                ),
-                const SizedBox(height: 40),
-                CustomButton(
-                  height: 55,
-                  width: double.infinity,
-                  backgroundColor: Colors.white,
-                  text: 'Send Message',
-                  textColor: AppColors.primaryColor,
-                  fontSize: 16,
-                  onTap: () {},
-                ),
-              ],
+            const SizedBox(height: 40),
+            const Text(
+              "Have a project in mind or want to collaborate?\nSend me a message below and I’ll get back to you!",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white70,
+                fontSize: 18,
+                height: 1.5,
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 60),
+            SizedBox(
+              width: 600,
+              child: Column(
+                children: [
+                  _buildTextField("Name", provider.nameController),
+                  const SizedBox(height: 25),
+                  _buildTextField("Email", provider.emailController),
+                  const SizedBox(height: 25),
+                  _buildTextField(
+                    "Message",
+                    provider.messageController,
+                    maxLines: 5,
+                  ),
+                  const SizedBox(height: 40),
+                  CustomButton(
+                    height: 55,
+                    width: double.infinity,
+                    backgroundColor: Colors.white,
+                    text: 'Send Message',
+                    textColor: AppColors.primaryColor,
+                    fontSize: 16,
+                    onTap: () => provider.sendMessage(context),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

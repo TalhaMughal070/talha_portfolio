@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:talha_portfolio/constants/app_colors.dart';
+import 'package:talha_portfolio/responsive/responsive.dart';
 
 class ProjectFeaturedSection extends StatelessWidget {
   const ProjectFeaturedSection({super.key});
