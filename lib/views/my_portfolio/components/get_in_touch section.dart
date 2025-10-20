@@ -57,6 +57,7 @@ class GetInTouchSection extends StatelessWidget {
                   ),
                   const SizedBox(height: 40),
                   CustomButton(
+                    isLoading: provider.isLoading,
                     height: 55,
                     width: double.infinity,
                     backgroundColor: Colors.white,

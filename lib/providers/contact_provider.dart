@@ -18,20 +18,20 @@ class ContactProvider with ChangeNotifier {
     String message = messageController.text.trim();
 
     if (name.isEmpty) {
-      showSnackbar(false, 'Please enter your name', context);
+      showSnackbar(true, 'Please enter your name', context);
       return;
     }
     if (email.isEmpty) {
-      showSnackbar(false, 'Please enter your email', context);
+      showSnackbar(true, 'Please enter your email', context);
       return;
     }
     final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
     if (!emailRegex.hasMatch(email)) {
-      showSnackbar(false, 'Please enter a valid email address', context);
+      showSnackbar(true, 'Please enter a valid email address', context);
       return;
     }
     if (message.isEmpty) {
-      showSnackbar(false, 'Please enter your message', context);
+      showSnackbar(true, 'Please enter your message', context);
       return;
     }
 
@@ -46,13 +46,13 @@ class ContactProvider with ChangeNotifier {
         'timestamp': FieldValue.serverTimestamp(),
       });
 
-      showSnackbar(true, 'Message sent successfully!', context);
+      showSnackbar(false, 'Message sent successfully!', context);
 
       nameController.clear();
       emailController.clear();
       messageController.clear();
     } catch (e) {
-      showSnackbar(false, 'Failed to send message. Try again.', context);
+      showSnackbar(true, 'Failed to send message. Try again.', context);
       debugPrint("Error sending message: $e");
     }
 
